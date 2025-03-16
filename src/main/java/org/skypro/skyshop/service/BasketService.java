@@ -22,16 +22,14 @@ public class BasketService {
     }
 
     public void addProduct(UUID id) {
-        if (storageService.getProductById(id).isEmpty()) {
-            throw new IllegalArgumentException("Нет в продаже продукта с таким id");
-        }
+        storageService.getProductById(id);
         productBasket.addProduct(id);
     }
 
     public UserBasket getUserBasket() {
         List<BasketItem> list = productBasket.getProducts().entrySet()
                 .stream()
-                .map(entry -> new BasketItem(storageService.getProductById(entry.getKey()).orElseThrow(), entry.getValue()))
+                .map(entry -> new BasketItem(storageService.getProductById(entry.getKey()).get(), entry.getValue()))
                 .toList();
 
         return new UserBasket(list);
