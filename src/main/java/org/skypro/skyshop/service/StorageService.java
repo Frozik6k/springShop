@@ -5,7 +5,9 @@ import org.springframework.stereotype.Service;
 
 import java.util.HashMap;
 import java.util.Map;
+import java.util.Optional;
 import java.util.UUID;
+
 @Service
 public class StorageService {
 
@@ -27,7 +29,7 @@ public class StorageService {
         return articles;
     }
 
-    private void addProductAndArticle(){
+    private void addProductAndArticle() {
         UUID id = UUID.randomUUID();
         products.put(id, new SimpleProduct("Носки", id, 100));
         id = UUID.randomUUID();
@@ -46,4 +48,9 @@ public class StorageService {
         id = UUID.randomUUID();
         articles.put(id, new Article("Носки", "Спортивные носки Adic", id));
     }
+
+    public Optional<Product> getProductById(UUID id) {
+        return Optional.ofNullable(getProducts().get(id));
+    }
+
 }
