@@ -1,5 +1,6 @@
 package org.skypro.skyshop.service;
 
+import org.skypro.skyshop.controller.error.NoSuchProductException;
 import org.skypro.skyshop.model.*;
 import org.springframework.stereotype.Service;
 
@@ -50,7 +51,7 @@ public class StorageService {
     }
 
     public Optional<Product> getProductById(UUID id) {
-        return Optional.ofNullable(getProducts().get(id));
+        return Optional.ofNullable(Optional.ofNullable(getProducts().get(id)).orElseThrow(NoSuchProductException::new));
     }
 
 }
