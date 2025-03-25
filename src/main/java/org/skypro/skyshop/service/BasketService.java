@@ -1,12 +1,11 @@
 package org.skypro.skyshop.service;
 
-import org.apache.catalina.Store;
-import org.skypro.skyshop.model.Product;
 import org.skypro.skyshop.model.basket.BasketItem;
 import org.skypro.skyshop.model.basket.ProductBasket;
 import org.skypro.skyshop.model.basket.UserBasket;
 import org.springframework.stereotype.Service;
 
+import java.util.ArrayList;
 import java.util.List;
 import java.util.UUID;
 
@@ -31,10 +30,8 @@ public class BasketService {
                 .stream()
                 .map(entry -> new BasketItem(storageService.getProductById(entry.getKey()).get(), entry.getValue()))
                 .toList();
-
         return new UserBasket(list);
 
     }
-
 
 }
